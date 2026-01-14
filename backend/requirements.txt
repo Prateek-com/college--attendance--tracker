@@ -4,7 +4,7 @@ uvicorn[standard]==0.27.0
 
 # MongoDB async driver
 motor==3.3.2
-pymongo==4.6.1
+pymongo==4.14.1
 
 # Authentication - using bcrypt directly for reliability
 bcrypt==3.2.2
