@@ -7,7 +7,7 @@ motor==3.3.2
 pymongo==4.6.1
 
 # Authentication - using bcrypt directly for reliability
-bcrypt==4.1.2
+bcrypt==3.2.2
 PyJWT==2.8.0
 
 # Validation
