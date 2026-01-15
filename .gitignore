@@ -22,3 +22,22 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# ======================
+# Backend (FastAPI / Python)
+# ======================
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Virtual environment
+venv/
+backend/venv/
+
+# Environment variables (SECRET)
+.env
+backend/.env
+
+# Logs
+*.log
