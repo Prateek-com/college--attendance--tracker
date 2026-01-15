@@ -6,7 +6,7 @@ Handles user registration, login, and profile
 from fastapi import APIRouter, HTTPException, Depends, status
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from datetime import datetime, timedelta
-import bcrypt
+from passlib.context import CryptContext
 import jwt
 import os
 import traceback
@@ -25,6 +25,11 @@ security = HTTPBearer()
 SECRET_KEY = os.getenv("JWT_SECRET", "your-secret-key-change-in-production")
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_HOURS = 24
+
+pwd_context = CryptContext(
+    schemes=["bcrypt"],
+    deprecated="auto"
+)
 
 # ==================== SCHEMAS ====================
 
@@ -58,20 +63,11 @@ class TokenResponse(BaseModel):
 # ==================== HELPERS ====================
 
 def hash_password(password: str) -> str:
-    """Hash a password using bcrypt directly - no passlib"""
-    password_bytes = password.encode('utf-8')
-    salt = bcrypt.gensalt()
-    hashed = bcrypt.hashpw(password_bytes, salt)
-    return hashed.decode('utf-8')
+    return pwd_context.hash(password)
 
 def verify_password(plain_password: str, hashed_password: str) -> bool:
-    """Verify a password against its hash using bcrypt directly"""
-    try:
-        password_bytes = plain_password.encode('utf-8')
-        hashed_bytes = hashed_password.encode('utf-8')
-        return bcrypt.checkpw(password_bytes, hashed_bytes)
-    except Exception:
-        return False
+    return pwd_context.verify(plain_password, hashed_password)
+
 
 def create_access_token(user_id: str, email: str) -> str:
     """Create a JWT access token"""
