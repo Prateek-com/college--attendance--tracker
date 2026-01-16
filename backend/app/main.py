@@ -10,8 +10,6 @@ from app.database import connect_to_mongo, close_mongo_connection
 from app.routes.auth import router as auth_router
 from app.routes.subjects import router as subjects_router
 from app.routes.attendance import router as attendance_router
-from dotenv import load_dotenv
-load_dotenv()
 
 
 @asynccontextmanager

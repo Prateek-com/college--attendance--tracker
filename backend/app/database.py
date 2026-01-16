@@ -17,8 +17,6 @@ load_dotenv()
 # MongoDB connection string
 MONGO_URL = os.getenv("MONGODB_URI")
 
-
-
 if not MONGO_URL:
     raise RuntimeError("❌ MONGO_URL environment variable not set")
 
