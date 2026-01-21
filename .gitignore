@@ -54,3 +54,7 @@ backend/.env
 # OS junk
 # ======================
 .DS_Store
+
+.env
+__pycache__/
+node_modules/
